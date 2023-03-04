@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/ioctl.h>
-#include "disp_manager.h"
+#include <disp_manager.h>
 
 static int fd_fb;
 static struct fb_var_screeninfo var;
@@ -59,7 +59,7 @@ static int FbGetBuffer(PDispBuff ptDispBuff)
     ptDispBuff->iXres = var.xres;
     ptDispBuff->iYres = var.yres;
     ptDispBuff->iBpp = var.bits_per_pixel;
-    ptDispBuff->buff = fb_base;
+    ptDispBuff->buff = (char *)fb_base;
     return 0;
 }
 

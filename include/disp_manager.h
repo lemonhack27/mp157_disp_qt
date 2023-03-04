@@ -1,6 +1,10 @@
 #ifndef _DISP_MANAGER_H
 #define _DISP_MANAGER_H
 
+#ifndef NULL
+#define NULL (void *)0
+#endif // !NULL
+
 typedef struct DispBuff {
     int iXres;
     int iYres;
@@ -29,5 +33,7 @@ void RegisterDisplay(PDispOpr ptDispOpr);
 void DisplayInit(void);
 int SelectDefaultDisplay(char *name);
 int InitDefaultDisplay(void);
-
+PDispBuff GetDisplayBuffer(void);
+int PutPixel(int x, int y, unsigned int dwColor);
+int FlushDisplayRegion(PRegion ptRegion, PDispBuff ptDispBuff);
 #endif // !_DISP_MANAGER_H

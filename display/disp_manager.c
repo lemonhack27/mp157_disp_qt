@@ -1,4 +1,6 @@
-#include "disp_manager.h"
+#include <stdio.h>
+#include <string.h>
+#include <disp_manager.h>
 
 /*管理底层的lcd、web*/
 static PDispOpr g_DispDevs = NULL;
@@ -10,7 +12,7 @@ static int pixel_width;
 
 int PutPixel(int x, int y, unsigned int dwColor)
 {
-    unsigned char *pen_8 = g_tDispBuff.buff + y*line_width + x*pixel_width;
+    unsigned char *pen_8 = (unsigned char *)(g_tDispBuff.buff + y*line_width + x*pixel_width);
     unsigned short *pen_16;
     unsigned int *pen_32;
 
@@ -42,8 +44,10 @@ int PutPixel(int x, int y, unsigned int dwColor)
 
 void RegisterDisplay(PDispOpr ptDispOpr)
 {
+    //ptDispOpr->ptNext = g_DispDevs;
+    //g_DispDevs->ptNext = ptDispOpr;
     ptDispOpr->ptNext = g_DispDevs;
-    g_DispDevs->ptNext = ptDispOpr;
+	g_DispDevs = ptDispOpr;
 }
 
 int SelectDefaultDisplay(char *name)
@@ -83,11 +87,16 @@ int InitDefaultDisplay(void)
     return 0;
 }
 
+PDispBuff GetDisplayBuffer(void)
+{
+    return &g_tDispBuff;
+}
+
 int FlushDisplayRegion(PRegion ptRegion, PDispBuff ptDispBuff)
 {
     return g_DispDefault->FlushRegion(ptRegion, ptDispBuff);
 }
-
+extern void FramebufferInit(void);
 void DisplayInit(void)
 {
     FramebufferInit();

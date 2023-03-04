@@ -10,10 +10,12 @@ typedef struct Region {
 
 typedef struct DispOpr {
     char *name;
-    char *GetBuffer(int *pXres, int *pYres, int *pBpp);
-    int FlushRegion(PRegion ptRegion, char *buffer);
+    int (*DeviceInit)(void);
+    int (*DeviceExit)(void);
+    char *(*GetBuffer)(int *pXres, int *pYres, int *pBpp);
+    int (*FlushRegion)(PRegion ptRegion, char *buffer);
     struct DispOpr *ptNext;
-};
+}DispOpr, *PDispOpr;
 
 
 #endif // !_DISP_MANAGER_H

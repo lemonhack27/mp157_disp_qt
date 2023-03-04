@@ -54,15 +54,16 @@ static int FbDeviceExit(void)
 也可以malloc返回一块无关的buffer，使用FbFlushRegion刷新数据到LCD上面
 */
 
-static char *FbGetBuffer(int *pXres, int *pYres, int *pBpp)
+static int FbGetBuffer(PDispBuff ptDispBuff)
 {
-    *pXres = var.xres;
-    *pYres = var.yres;
-    *pBpp = var.bits_per_pixel;
-    return fb_base;
+    ptDispBuff->iXres = var.xres;
+    ptDispBuff->iYres = var.yres;
+    ptDispBuff->iBpp = var.bits_per_pixel;
+    ptDispBuff->buff = fb_base;
+    return 0;
 }
 
-static int FbFlushRegion(PRegion ptRegion, char *buffer)
+static int FbFlushRegion(PRegion ptRegion, PDispBuff ptDispBuff)
 {
     return 0;
 }
@@ -75,3 +76,8 @@ static DispOpr g_tFramebufferOpr = {
     .GetBuffer = FbGetBuffer,
     .FlushRegion = FbFlushRegion,
 };
+
+void FramebufferInit(void)
+{
+    RegisterDisplay(&g_tFramebufferOpr);
+}

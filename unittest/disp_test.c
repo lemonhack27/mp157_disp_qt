@@ -4622,12 +4622,6 @@ static const unsigned char fontdata_8x16[FONTDATAMAX] = {
 
 };
 
-int fd_fb;
-struct fb_var_screeninfo var;	/* Current var */
-int screen_size;
-unsigned char *fbmem;
-unsigned int line_width;
-unsigned int pixel_width;
 void lcd_put_ascii(int x, int y, unsigned char c)
 {
 	unsigned char *dots = (unsigned char *)&fontdata_8x16[c*16];
@@ -4655,6 +4649,7 @@ void lcd_put_ascii(int x, int y, unsigned char c)
 
 int main(int argc, char **argv)
 {
+	int i;
 	Region region;
 	PDispBuff ptBuffer;
 		
@@ -4665,15 +4660,12 @@ int main(int argc, char **argv)
 	InitDefaultDisplay();
 
 	lcd_put_ascii(100, 100, 'A');
-
-	region.iLeftUpX = 100;
-	region.iLeftUpY = 100;
-	region.iWidth   = 8;
-	region.iHeigh   = 16;
-
+	region.iLeftUpX = 0;
+	region.iLeftUpY = 0;
+	region.iWidth   = 800;
+	region.iHeigh   = 480;
 	ptBuffer = GetDisplayBuffer();
 	FlushDisplayRegion(&region, ptBuffer);
-	
+	printf("x=%d,y=%d,ibpp=%d\n",ptBuffer->iXres,ptBuffer->iYres,ptBuffer->iBpp);
 	return 0;	
 }
-

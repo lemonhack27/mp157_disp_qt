@@ -9,6 +9,7 @@ typedef struct DispBuff {
     int iXres;
     int iYres;
     int iBpp;
+    int line_length;
     char *buff;
 }DispBuff, *PDispBuff;
 

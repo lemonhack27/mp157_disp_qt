@@ -11,6 +11,7 @@
 
 static int fd_fb;
 static struct fb_var_screeninfo var;
+static struct fb_fix_screeninfo var1;//可变参数，这才能获得正确的lcd宽度数据
 static int screen_size;
 static unsigned char *fb_base;
 static unsigned int line_width;
@@ -29,10 +30,17 @@ static int FbDeviceInit(void)
         printf("cant't get var\n");
         return -1;
     }
+    if(ioctl(fd_fb, FBIOGET_FSCREENINFO, &var1))
+    {
+        printf("cant't get var\n");
+        return -1;
+    }
 
-    line_width = var.xres * var.bits_per_pixel / 8;
+//    line_width = var.xres * var.bits_per_pixel / 8;
+    line_width = var1.line_length;
     pixel_width = var.bits_per_pixel / 8;
-    screen_size = var.xres * var.yres * var.bits_per_pixel / 8;
+//    screen_size = var.xres * var.yres * var.bits_per_pixel / 8;
+    screen_size = line_width * var.yres;
     fb_base = (unsigned char *)mmap(NULL, screen_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd_fb, 0);
     if(fb_base == (unsigned char *)-1)
     {
@@ -59,6 +67,7 @@ static int FbGetBuffer(PDispBuff ptDispBuff)
     ptDispBuff->iXres = var.xres;
     ptDispBuff->iYres = var.yres;
     ptDispBuff->iBpp = var.bits_per_pixel;
+    ptDispBuff->line_length = var1.line_length;
     ptDispBuff->buff = (char *)fb_base;
     return 0;
 }

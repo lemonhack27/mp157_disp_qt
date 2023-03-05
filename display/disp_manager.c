@@ -31,11 +31,15 @@ int PutPixel(int x, int y, unsigned int dwColor)
         red = (dwColor >> 16) & 0xff;
         green = (dwColor >> 8) & 0xff;
         blue = (dwColor >> 0) & 0xff;
-        dwColor = ((red >> 3) << 11) | ((green >> 2) << 5) | (blue << 3);
+        dwColor = ((red >> 3) << 11) | ((green >> 2) << 5) | (blue >> 3);
+        *pen_16 = dwColor;
+        break;
     case 32:
         *pen_32 = dwColor;
+        break;
     default:
         printf("can't support %dbpp\n", g_tDispBuff.iBpp);
+        return -1;
         break;
     }
     return 0;

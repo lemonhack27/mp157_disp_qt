@@ -4655,19 +4655,25 @@ void lcd_put_ascii(int x, int y, unsigned char c)
 
 int main(int argc, char **argv)
 {
-    Region region;
-    PDispBuff ptBuffer;
-    DisplayInit();
-    // SelectDefaultDisplay("fb");
-    // InitDefaultDisplay();
-	// lcd_put_ascii(100, 100, 'A'); /*在屏幕中间显示8*16的字母A*/
-    // region.iLeftUpX = 100;
-    // region.iLeftUpY = 100;
-    // region.iWidth = 8;
-    // region.iHeigh = 16;
-    // ptBuffer = GetDisplayBuffer();
-    // FlushDisplayRegion(&region, ptBuffer);
+	Region region;
+	PDispBuff ptBuffer;
+		
+	DisplayInit();
 
+	SelectDefaultDisplay("fb");
+
+	InitDefaultDisplay();
+
+	lcd_put_ascii(100, 100, 'A');
+
+	region.iLeftUpX = 100;
+	region.iLeftUpY = 100;
+	region.iWidth   = 8;
+	region.iHeigh   = 16;
+
+	ptBuffer = GetDisplayBuffer();
+	FlushDisplayRegion(&region, ptBuffer);
+	
 	return 0;	
 }
 

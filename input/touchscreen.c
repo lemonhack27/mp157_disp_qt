@@ -50,7 +50,7 @@ static InputDevice g_tTouchscreenDev = {
     .DeviceExit = TouchscreenDeviceExit,
 };
 
-#if 1
+#if 0
 int main(int argc, char **argv)
 {
     InputEvent event;

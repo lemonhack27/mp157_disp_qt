@@ -47,7 +47,7 @@ int PutPixel(int x, int y, unsigned int dwColor)
     
     if( (x > g_tDispBuff.iXres) ||  (y > g_tDispBuff.iYres) )
     {
-        return ;
+        return -1;
     }
     else
     {

@@ -29,5 +29,9 @@ typedef struct InputDevice
     struct InputDevice *ptNext;
 }InputDevice, *PInputDevice;
 
+void RegisterInputDevice(PInputDevice ptInputDev);
+void InputInit(void);
+void InputDeviceInit(void);
+int GetInputEvent(PInputEvent ptInputEvent);
 
 #endif // !_INPUT_MANAGER_H

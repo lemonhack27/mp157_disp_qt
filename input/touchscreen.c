@@ -50,6 +50,11 @@ static InputDevice g_tTouchscreenDev = {
     .DeviceExit = TouchscreenDeviceExit,
 };
 
+void TouchscreenRegister(void)
+{
+    RegisterInputDevice(&g_tTouchscreenDev);
+}
+
 #if 0
 int main(int argc, char **argv)
 {

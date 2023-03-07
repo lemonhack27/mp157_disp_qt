@@ -72,7 +72,12 @@ static InputDevice g_tNetinputDev = {
     .DeviceExit = NetinputDeviceExit,
 };
 
-#if 1
+void NetInputRegister(void)
+{
+    RegisterInputDevice(&g_tNetinputDev);
+}
+
+#if 0
 int main(int argc, char **argv)
 {
     InputEvent event;

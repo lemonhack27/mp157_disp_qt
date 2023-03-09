@@ -17,9 +17,10 @@ export STRIP OBJCOPY OBJDUMP
 CFLAGS := -Wall -O2 -g
 CFLAGS += -I $(shell pwd)/include
 
-LDFLAGS := -lts -lpthread
-
+LDFLAGS := -lts -lpthread -lfreetype
+LDFLAGS += -Wl,-rpath-link=/home/lemonhack/study/linuxstudy/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf/arm-linux-gnueabihf/lib
 export CFLAGS LDFLAGS
+
 
 TOPDIR := $(shell pwd)
 export TOPDIR
@@ -28,6 +29,7 @@ TARGET := test
 
 obj-y += display/
 obj-y += input/
+obj-y += font/
 obj-y += unittest/
 
 

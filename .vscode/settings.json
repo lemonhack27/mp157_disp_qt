@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "input_manager.h": "c"
+        "input_manager.h": "c",
+        "types.h": "c",
+        "disp_manager.h": "c"
     }
 }

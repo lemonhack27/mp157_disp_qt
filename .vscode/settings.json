@@ -2,6 +2,7 @@
     "files.associations": {
         "input_manager.h": "c",
         "types.h": "c",
-        "disp_manager.h": "c"
+        "disp_manager.h": "c",
+        "fcntl.h": "c"
     }
 }

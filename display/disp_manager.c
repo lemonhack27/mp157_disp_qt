@@ -11,6 +11,46 @@ static DispBuff g_tDispBuff;
 static int line_width;
 static int pixel_width;
 
+void DrawTextRegionCentral(char *name, PRegion ptRegion, unsigned int dwColor)
+{
+    int n = strlen(name);
+    int iFontSize = ptRegion->iWidth / n / 2;
+    int iOriginX, iOriginY;
+    int i = 0;
+    FontBitMap tFontBitMap;
+    int ret;
+
+    if (iFontSize > ptRegion->iHeigh)
+        iFontSize = ptRegion->iHeigh;
+    
+    iOriginX = (ptRegion->iWidth - n * iFontSize) / 2 + ptRegion->iLeftUpX;
+    iOriginY = (ptRegion->iHeigh - iFontSize) / 2 + iFontSize + ptRegion->iLeftUpY;
+
+    SetFontSize(iFontSize);
+    while (name[i])
+	{
+		/* get bitmap */
+		tFontBitMap.iCurOriginX = iOriginX;
+		tFontBitMap.iCurOriginY = iOriginY;
+		ret = GetFontBitMap(name[i], &tFontBitMap);
+		if (ret)
+		{
+			printf("GetFontBitMap err\n");
+			return -1;
+		}
+
+		/* draw on buffer */		
+		DrawFontBitMap(&tFontBitMap, dwColor);
+		
+
+		iOriginX = tFontBitMap.iNextOriginX;
+		iOriginY = tFontBitMap.iNextOriginY;	
+		i++;
+	}
+
+
+}
+
 void DrawFontBitMap(PFontBitMap ptFontBitMap, unsigned int dwColor)
 {
     int i, j, p, q;
@@ -37,6 +77,23 @@ void DrawFontBitMap(PFontBitMap ptFontBitMap, unsigned int dwColor)
         }
     }
 }
+
+void DrawRegion(PRegion ptRegion, unsigned int dwColor)
+{
+    int x = ptRegion->iLeftUpX;
+    int y = ptRegion->iLeftUpY;
+    int width = ptRegion->iWidth;
+    int heigh = ptRegion->iHeigh;
+
+    int i, j;
+
+    for (j = y; j < y + heigh; j++)
+    {
+        for(i = x; i < x + width; i++)
+            PutPixel(i, j, dwColor);
+    }
+}
+
 
 int PutPixel(int x, int y, unsigned int dwColor)
 {

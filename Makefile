@@ -17,7 +17,7 @@ export STRIP OBJCOPY OBJDUMP
 CFLAGS := -Wall -O2 -g
 CFLAGS += -I $(shell pwd)/include
 
-LDFLAGS := -lts -lpthread -lfreetype
+LDFLAGS := -lts -lpthread -lfreetype -lm
 LDFLAGS += -Wl,-rpath-link=/home/lemonhack/study/linuxstudy/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf/arm-linux-gnueabihf/lib
 export CFLAGS LDFLAGS
 
@@ -30,9 +30,10 @@ TARGET := test
 obj-y += display/
 obj-y += input/
 obj-y += font/
-obj-y += unittest/
+obj-y += business/
 obj-y += ui/
 obj-y += page/
+obj-y += config/
 
 
 all : start_recursive_build $(TARGET)

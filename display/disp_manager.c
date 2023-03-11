@@ -36,7 +36,7 @@ void DrawTextRegionCentral(char *name, PRegion ptRegion, unsigned int dwColor)
 		if (ret)
 		{
 			printf("GetFontBitMap err\n");
-			return -1;
+			return ;
 		}
 
 		/* draw on buffer */		

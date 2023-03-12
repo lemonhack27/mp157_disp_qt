@@ -9,13 +9,21 @@ LCD存在固定参数和可变参数，二者不一样，使用的时候选择�
 typedef struct DispOpr 
 {
     char *name;
-    显示系统的名称，LCD的framebuffer还是WEB浏览器
+
+    /*显示系统的名称，LCD的framebuffer还是WEB浏览器*/
+
     int (*DeviceInit)(void);
+
     /*LCD屏幕的硬件数据获取以及映射framebuffer地址*/
+
     int (*DeviceExit)(void);
+
     /*关闭lcd设备以及解除映射*/
+
     int (*GetBuffer)(PDispBuff ptDispBuff);
+
     /*将硬件数据赋值给全局存储硬件数据结构体DispBuff*/
+    
     int (*FlushRegion)(PRegion ptRegion, PDispBuff ptDispBuff);
     struct DispOpr *ptNext;
 }DispOpr, *PDispOpr;

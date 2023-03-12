@@ -6,10 +6,10 @@ LCD存在固定参数和可变参数，二者不一样，使用的时候选择�
 # 各模块函数
 ## 初始化显示系统、
 ### 显示系统的结构体
-__typedef struct DispOpr__
+_typedef struct DispOpr_
 {\
-    __char *name;__显示系统的名称，LCD的framebuffer还是WEB浏览器\
-    **int (*DeviceInit)(void);**LCD屏幕的硬件数据获取以及映射framebuffer地址\
+    _char *name_;显示系统的名称，LCD的framebuffer还是WEB浏览器\
+    _int (*DeviceInit)(void)_;LCD屏幕的硬件数据获取以及映射framebuffer地址\
     **int (*DeviceExit)(void);**关闭lcd设备以及解除映射\
     **int (*GetBuffer)(PDispBuff ptDispBuff);**将硬件数据赋值给全局存储硬件数据结构体DispBuff\
     **int (*FlushRegion)(PRegion ptRegion, PDispBuff ptDispBuff);**

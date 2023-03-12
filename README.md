@@ -7,24 +7,15 @@ LCD存在固定参数和可变参数，二者不一样，使用的时候选择�
 ## 初始化显示系统、
 ### 显示系统的结构体
 typedef struct DispOpr 
-{
-
-    /*显示系统的名称，LCD的framebuffer还是WEB浏览器*/
-
-    char *name;
-
-    /*LCD屏幕的硬件数据获取以及映射framebuffer地址*/
-
-    int (*DeviceInit)(void);
-
-    /*关闭lcd设备以及解除映射*/
-
-    int (*DeviceExit)(void);
-
-    /*将硬件数据赋值给全局存储硬件数据结构体DispBuff*/
-
-    int (*GetBuffer)(PDispBuff ptDispBuff);
-
+{  
+    /*显示系统的名称，LCD的framebuffer还是WEB浏览器*/  
+    char *name;  
+    /*LCD屏幕的硬件数据获取以及映射framebuffer地址*/  
+    int (*DeviceInit)(void);  
+    /*关闭lcd设备以及解除映射*/  
+    int (*DeviceExit)(void);  
+    /*将硬件数据赋值给全局存储硬件数据结构体DispBuff*/  
+    int (*GetBuffer)(PDispBuff ptDispBuff);  
     
 
     int (*FlushRegion)(PRegion ptRegion, PDispBuff ptDispBuff);
@@ -67,5 +58,5 @@ typedef struct DispBuff
     在选择要使用的显示系统基础上面，调用全局的显示操作结构体内部的设备初始化函数，调用底层framebuffer的驱动。使用open来打开设备；使用ioctl来获取lcd屏幕的硬件数据，如分辨率；使用mmap来映射lcd屏幕的起始地址和大小。将获取的硬件数据放在专门的结构体里面。
     InitDefaultDisplay()-->FbDeviceInit(void);
     InitDefaultDisplay()-->FbGetBuffer(PDispBuff ptDispBuff);
-    
+
 

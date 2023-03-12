@@ -3,6 +3,7 @@
         "input_manager.h": "c",
         "types.h": "c",
         "disp_manager.h": "c",
-        "fcntl.h": "c"
+        "fcntl.h": "c",
+        "font_manager.h": "c"
     }
 }
